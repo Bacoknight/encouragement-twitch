@@ -30,4 +30,5 @@ The function name must follow a specific naming convention: "event_XXX", where X
 - raw_pubsub
 
 These functions may receive contextual data, which you can use to send messages to the stream chat.
+
 TwitchIO bots can also respond to chat commands ("!test" for example), but this is much better documented on the library.
