@@ -39,7 +39,8 @@ expiry_time = None
 # Stores the request token.
 bearer_token = None
 
-# Initialise the bot. I'm not actually sure what the prefix does...
+# Initialise the bot. The prefix defines what a user needs to put in the chat to have their message recognised as a command. 
+# For example "!hi" (in the chat) will be recognised as a "hi" command, whereas "hi" (in the chat) will not.
 bot = commands.Bot(
 irc_token=IRC_TOKEN,
 nick=IRC_NICKNAME,
