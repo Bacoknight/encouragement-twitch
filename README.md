@@ -17,7 +17,7 @@ You can then run bot.py and your bot will start being friendly all over Twitch!
 # Notes on how TwitchIO works
 TwitchIO (https://github.com/TwitchIO/TwitchIO) is a library used for interacting with Twitch IRC in a relatively simple manner. For a bot created by the library to respond to IRC events, it must implement specific functions.
 This function must be an async function annotated with @bot.event. 
-The function name must follow a specific naming convention: "event_XXX", where XXX is a specific IRC event. The events currently available are:
+The function must also follow a specific naming convention: "event_XXX", where XXX is a specific IRC event. The IRC events currently available (obtained from the websocket.py file in the library) are:
 - raw_data
 - ready
 - message
