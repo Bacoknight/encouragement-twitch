@@ -1,5 +1,5 @@
 # Twitch Encouragement Bot
-A simple bot which uses the TwitchIO library to send an encouraging message to random channels.
+A bot which uses the TwitchIO library to send an encouraging message to random channels.
 
 # Usage
 To use this bot, you must populate a file called botsecrets.py with the following data:
