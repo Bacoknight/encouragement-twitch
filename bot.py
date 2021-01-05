@@ -13,7 +13,7 @@ from botsecrets import CLIENT_ID, CLIENT_SECRET, IRC_TOKEN, IRC_NICKNAME, IRC_IN
 MAX_WAIT_SECS = 60
 
 # Value [0, 1] (0 and 1 inclusive) above which the channel request travels further down the list.
-SCROLL_VAL = 0.01
+SCROLL_THRESHOLD = 0.01
 
 # Number of channels returned per Twitch API request. Should be larger than the maximum size of the 'visited_channels' list to prevent infinite loops. Maximum is 100 as defined by Twitch.
 RESPONSE_SIZE = "100"
@@ -157,7 +157,7 @@ def get_new_channel(page_cursor = None, num_rerolls = 0):
         # Check whether we could/should travel further down.
         if "cursor" in response_json["pagination"]:
             # Roll a random number to check whether we should move further down the channel list.
-            if random() > SCROLL_VAL:
+            if random() > SCROLL_THRESHOLD:
                 page_cursor = response_json["pagination"]["cursor"]
                 return get_new_channel(page_cursor, num_rerolls)
 
@@ -169,6 +169,11 @@ def get_new_channel(page_cursor = None, num_rerolls = 0):
         channel_name = None
         global visited_channels
         while (channel_status != "live") or (channel_name in visited_channels):
+            # Ensure returned list isn't empty.
+            if not sampling_data:
+                print("Reach end of list after " + str(num_rerolls) + " rerolls. Restarting channel seek.")
+                return get_new_channel(num_rerolls=num_rerolls)
+
             # Choose a random channel from the list.
             chosen_channel = choice(sampling_data)
             channel_status = chosen_channel["type"]
